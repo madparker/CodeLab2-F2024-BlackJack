@@ -5,8 +5,6 @@ using System.Collections.Generic;
 
 public class DeckOfCards : MonoBehaviour {
 	
-	public Text cardNumUI;
-	public Image cardImageUI;
 	public Sprite[] cardSuits;
 
 	public class Card{
