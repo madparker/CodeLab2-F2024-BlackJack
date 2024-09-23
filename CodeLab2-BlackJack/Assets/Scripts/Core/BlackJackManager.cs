@@ -19,16 +19,19 @@ public class BlackJackManager : MonoBehaviour {
 	public void DealerBusted(){
 		//game over text and color for the dealer losing
 		GameOverText("DEALER BUSTS!", Color.green);
+		HidePlayerButtons();
 	}
 		
 	public void PlayerWin(){
 		//game over text for winning
 		GameOverText("YOU WIN!", Color.green);
+		HidePlayerButtons();
 	}
 		
 	public void PlayerLose(){
 		//game over text for losing
 		GameOverText("YOU LOSE.", Color.red);
+		HidePlayerButtons();
 	}
 
 
