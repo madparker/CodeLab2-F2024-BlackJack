@@ -1,26 +1,31 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace AllisonTerry
-{ public class FixedBlackJackManagerScript : BlackJackManager
+{
+    
+    
+    public class FixedBlackJackManagerScript : BlackJackManager
     {
-        // Start is called before the first frame update
-        void Start()
+
+        protected BlackJackHand blackJackHand;
+
+        private void Start()
         {
-
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-
+            /*blackJackHand = GetComponent<BlackJackHand>();
+            if (blackJackHand.handVals == 21)
+            {
+                GameObject.Find("BlackJackManager").GetComponent<BlackJackManager>().BlackJack();
+            }*/
         }
 
         public override int GetHandValue(List<DeckOfCards.Card> hand)
         {
             //first get the value of the initial hand
             int handValue = base.GetHandValue(hand);
+            
             //keep track of the number of aces in a hand
             int playerAces = 0;
             int newHandValue = 0;
