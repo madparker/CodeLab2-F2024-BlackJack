@@ -6,22 +6,18 @@ namespace DabuLyu
 {
     public class FixedBlackJackHand : BlackJackHand
     {
-        // Start is called before the first frame update
-        void Start()
+        protected override void SetupHand()
         {
-        
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-        
+            base.SetupHand();
+            NaturalBlackJackCheck();
+            
         }
         
         protected override void ShowValue()
         {
             //base.ShowValue();
-            handVals = GetComponent<FixedBlackJackManager>().BlackJackGetHandValue(hand);
+            FixedBlackJackManager manager = GameObject.Find("BlackJackManager").GetComponent<FixedBlackJackManager>();
+            handVals = manager.BlackJackGetHandValue(hand);
 			
             total.text = "Player: " + handVals;
 
@@ -29,6 +25,16 @@ namespace DabuLyu
                 GameObject.Find("BlackJackManager").GetComponent<BlackJackManager>().PlayerBusted();
             }
             
+        }
+        
+        
+        public void NaturalBlackJackCheck()
+        {
+            FixedBlackJackManager manager = GameObject.Find("BlackJackManager").GetComponent<FixedBlackJackManager>();
+            if (hand.Count == 2 && hand[0].GetCardHighValue() == 10 && hand[1].GetCardHighValue() == 11)
+            {
+                manager.PlayerWin();
+            }
         }
     }
 

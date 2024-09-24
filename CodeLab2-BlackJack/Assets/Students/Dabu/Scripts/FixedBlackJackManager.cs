@@ -70,6 +70,7 @@ namespace DabuLyu
             return handValue;
         }
         
+        
         public int DealerGetHandValue(List<DeckOfCards.Card> hand)
         {
             int handValue = 0;
@@ -86,12 +87,17 @@ namespace DabuLyu
             }
             
             //to make sure the dealer bust or smaller than player
+            while (aceCount > 0 && handValue < 21)
+            {
+                handValue -= 10;
+                aceCount--;
+            }
+            
+    
 
             return handValue;
 
         }
-
-
     }
 
 }
