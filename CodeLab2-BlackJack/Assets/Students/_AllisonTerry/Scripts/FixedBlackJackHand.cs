@@ -7,9 +7,9 @@ namespace AllisonTerry
     public class FixedBlackJackHand : BlackJackHand
     {
 
-        protected override void ShowValue()
+        protected override void SetupHand()
         {
-            base.ShowValue();
+            base.SetupHand();
             if(handVals == 21){
                 GameObject.Find("BlackJackManager").GetComponent<BlackJackManager>().BlackJack();
             }
