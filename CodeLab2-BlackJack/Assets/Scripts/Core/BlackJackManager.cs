@@ -10,39 +10,43 @@ public class BlackJackManager : MonoBehaviour {
 	public GameObject tryAgain;
 	public string loadScene;
 
+	//initiates a game over condition for if the player busts
+	//meaning their hand value is greater than 21
 	public void PlayerBusted(){
-		//game over for the player busting
-		HidePlayerButtons();
-		GameOverText("YOU BUST", Color.red);
+		HidePlayerButtons(); //hides the buttons on screen to prevent the player from making any more moves
+		GameOverText("YOU BUST", Color.red); //feeds the relevant text and color into the GameOverText function
 	}
 
+	//initiates a game over condition for if the dealer busts
+	//meaning the dealer's hand value is greater than 21
 	public void DealerBusted(){
-		//game over text and color for the dealer losing
-		GameOverText("DEALER BUSTS!", Color.green);
-		HidePlayerButtons();
+		GameOverText("DEALER BUSTS!", Color.green); //feeds the relevant text and color into the GameOverText function
+		HidePlayerButtons(); //hides the buttons on screen to prevent the player from making any more moves
 	}
 		
+	//initiates a game over condition for if the player wins
+	//meaning their hand value is closer to 21 than the dealer's, but no one has busted
 	public void PlayerWin(){
-		//game over text for winning
-		GameOverText("YOU WIN!", Color.green);
-		HidePlayerButtons();
+		GameOverText("YOU WIN!", Color.green); //feeds the relevant text and color into the GameOverText function
+		HidePlayerButtons(); //hides the buttons on screen to prevent the player from making any more moves
 	}
 		
+	//initiates a game over condition for if the player loses
+	//meaning the dealer's hand value is closer to 21 than the player's, but no one has busted
 	public void PlayerLose(){
-		//game over text for losing
-		GameOverText("YOU LOSE.", Color.red);
-		HidePlayerButtons();
+		GameOverText("YOU LOSE.", Color.red); //feeds the relevant text and color into the GameOverText function
+		HidePlayerButtons(); //hides the buttons on screen to prevent the player from making any more moves
 	}
 
 
 	public void BlackJack(){
-		//sets the game over text to win and the color to green
+		//sets the game over text to win and the color of the text to green
 		GameOverText("Black Jack!", Color.green);
 		//then hides the hit and stay buttons
 		HidePlayerButtons();
 	}
 
-	//displays the game over text and sets the try again button to be on
+	//displays the game over text on screen and sets the try again button to be on
 	public void GameOverText(string str, Color color){
 		statusText.text = str;
 		statusText.color = color;
@@ -50,18 +54,18 @@ public class BlackJackManager : MonoBehaviour {
 		tryAgain.SetActive(true);
 	}
 
-	//hides the buttons hti and stay
+	//hides the buttons which allow the player to hit or stay
 	public void HidePlayerButtons(){
 		GameObject.Find("HitButton").SetActive(false);
 		GameObject.Find("StayButton").SetActive(false);
 	}
 
-	//try again button reloads the scene
+	//a function which, when called, reloads the scene and starts the game over
 	public void TryAgain(){
 		SceneManager.LoadScene(loadScene);
 	}
 
-	//adds all the cards together to get the hand value
+	//adds all the cards in a specific hand together to get the hand's value
 	public virtual int GetHandValue(List<DeckOfCards.Card> hand){
 		int handValue = 0;
 

@@ -39,7 +39,7 @@ public class DeckOfCards : MonoBehaviour {
 		
 		public Suit suit;
 
-		//a card returns something with a card number and a suit
+		//this function returns a Card object, which comes with a card number and a suit
 		public Card(Type cardNum, Suit suit){
 			this.cardNum = cardNum;
 			this.suit = suit;
@@ -50,7 +50,7 @@ public class DeckOfCards : MonoBehaviour {
 			return "The " + cardNum + " of " + suit;
 		}
 
-		//setting the value of the high cards
+		//returns the highest possible value of each card type
 		public int GetCardHighValue(){
 			int val;
 
@@ -72,30 +72,31 @@ public class DeckOfCards : MonoBehaviour {
 		}
 	}
 
-	//gets the deck which is a shuffle bag of cards
+	//declares the deck variable, which is a shuffle bag of cards
 	public static ShuffleBag<Card> deck;
 
 	// Use this for initialization
 	void Awake () {
 		
-		//if the deck is not valid meaning its empty
+		//if the deck is not valid, meaning its empty/null
 		if(!IsValidDeck()){
 			//make a new deck
 			deck = new ShuffleBag<Card>();
 
+			//calls this function to initialize every card in the deck
 			AddCardsToDeck();
 		}
 
 		Debug.Log("Cards in Deck: " + deck.Count);
 	}
 
-	//a deck is valid if it is not empty
+	//returns true if a deck is valid, meaning it is not empty
 	protected virtual bool IsValidDeck(){
 		return deck != null; 
 	}
 
-	//go through every card in the deck and assign it a suit and number
-	//there should be 52 at the end of this loop
+	//go through every card in the deck and assign it a unique combination of suit and number
+	//there should be 52 unique cards at the end of this loop
 	protected virtual void AddCardsToDeck(){
 		foreach (Card.Suit suit in Card.Suit.GetValues(typeof(Card.Suit))){
 			foreach (Card.Type type in Card.Type.GetValues(typeof(Card.Type))){
@@ -104,11 +105,11 @@ public class DeckOfCards : MonoBehaviour {
 		}
 	}
 	
-	// Update is called once per frame
+	// Update is called once per frame, except in this game, because update isn't being used
 	void Update () {
 	}
 
-	//this function brings in the next card from the shuffle bag
+	//this function returns the next card from the shuffle bag
 	public virtual Card DrawCard(){
 		Card nextCard = deck.Next();
 
@@ -116,8 +117,8 @@ public class DeckOfCards : MonoBehaviour {
 	}
 
 
-	//if the card is not a high card just return the card with its number
-	//if it is a high card return it with its symbol
+	//if the card is not a face card (J, Q, K, A) returns the card's hashcode (which is equal to its type)
+	//if it is a face card, return it with its symbol
 	public string GetNumberString(Card card){
 		if(card.cardNum.GetHashCode() <= 10){
 			return card.cardNum.GetHashCode() + "";
@@ -126,7 +127,7 @@ public class DeckOfCards : MonoBehaviour {
 		}
 	}
 		
-	//get the sprite of the suit
+	//returns the sprite of the suit of the card passed into this function
 	public Sprite GetSuitSprite(Card card){
 		return cardSuits[card.suit.GetHashCode()];
 	}
