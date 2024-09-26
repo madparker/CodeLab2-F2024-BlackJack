@@ -4,11 +4,15 @@ using UnityEngine.SceneManagement;
 using System.Collections;
 using System.Collections.Generic;
 
+namespace EzrealYe{
+
+
 public class BlackJackManager : MonoBehaviour {
 
 	public Text statusText;
 	public GameObject tryAgain;
 	public string loadScene;
+	[SerializeField] private GameObject hitButton;
 	
 
 	//initiates a game over condition for if the player busts
@@ -57,7 +61,7 @@ public class BlackJackManager : MonoBehaviour {
 
 	//hides the buttons which allow the player to hit or stay
 	public void HidePlayerButtons(){
-		GameObject.Find("HitButton").SetActive(false);
+		hitButton.SetActive(false);
 		GameObject.Find("StayButton").SetActive(false);
 	}
 
@@ -75,4 +79,5 @@ public class BlackJackManager : MonoBehaviour {
 		}
 		return handValue;
 	}
+}
 }
