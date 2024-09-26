@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace EzrealYe
+namespace EzrealYe{
 public class BlackJackHand : MonoBehaviour {
 
 	public Text total;
@@ -97,4 +97,5 @@ public class BlackJackHand : MonoBehaviour {
 
 		return manager.GetHandValue(hand);
 	}
+}
 }
