@@ -33,8 +33,6 @@ namespace AllisonTerry
             //if the player is about to bust
             if (handValue > 21)
             {
-                //set the hand value back to 0
-                
                 //go back through the hand
                 foreach (DeckOfCards.Card handCard in hand)
                 {
@@ -42,17 +40,21 @@ namespace AllisonTerry
                     if (handCard.cardNum == DeckOfCards.Card.Type.A)
                     {
                         print("this is an ace");
+                        //and they have not pulled an ace and their original value was under 21
                         if (playerAces == 0 && handValue < 21 )
                         {
+                            //the value of the ace is 11
                             playerAces++;
                             newHandValue += handCard.GetCardHighValue();
                         }
                         else if (playerAces == 0)
                         {
+                            //else its the first ace but you were over 21
                             playerAces++;
                             //add one to the hand value instead
                             newHandValue += 1;
                         }
+                        //else if the ace is not the first ace
                         else if (playerAces > 1)
                         {
                             playerAces++;
