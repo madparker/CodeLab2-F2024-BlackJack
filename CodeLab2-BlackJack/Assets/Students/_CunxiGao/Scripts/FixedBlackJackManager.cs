@@ -32,9 +32,9 @@ namespace CunxiGao
             }
 
             // If the total value exceeds 21 and there are Aces in hand, change the value of Aces from 11 to 1
-            while(handValue > 21 && aceCount > 0){
+            for (int i = 0; i < aceCount && handValue > 21; i++)
+            {
                 handValue -= 10; // Reduce Ace value from 11 to 1
-                aceCount--;
             }
 
             return handValue;
