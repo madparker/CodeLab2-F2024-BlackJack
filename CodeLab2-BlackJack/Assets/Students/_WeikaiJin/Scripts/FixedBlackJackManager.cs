@@ -26,8 +26,6 @@ namespace  Weikai
                 handValue -= acesToReduce * 10;
             }
             
-            if(hand.Count  == 2 && handValue == 21)
-                BlackJack();
             
             return handValue;
         }
