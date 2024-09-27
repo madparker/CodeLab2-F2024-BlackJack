@@ -37,10 +37,6 @@ namespace VivianChen
             Debug.Log("HAND VALUE: " + handValue);
             
             return handValue;
-            
-            // Same, I don't know why, 
-            // after "Try again", instead of running this function,
-            // the game will run the original function.
         }
     }
 }
