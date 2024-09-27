@@ -1,5 +1,10 @@
-namespace Students._NengkuanChen.Scripts
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+namespace  Weikai
 {
+    
     public class FixedDealerHand : DealerHand
     {
         protected override bool DealStay(int handVal)
@@ -7,4 +12,5 @@ namespace Students._NengkuanChen.Scripts
             return handVal >= 17;
         }
     }
+
 }

@@ -26,6 +26,7 @@ namespace  Weikai
                 handValue -= acesToReduce * 10;
             }
             
+            
             return handValue;
         }
     }

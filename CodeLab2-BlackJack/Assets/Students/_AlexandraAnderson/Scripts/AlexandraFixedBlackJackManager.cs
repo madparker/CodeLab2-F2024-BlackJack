@@ -2,15 +2,44 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace VivianChen
+namespace AlexandraAnderson
 {
-    public class VivianFixedBlackJackManager : BlackJackManager
+    public class AlexandraFixedBlackJackManager : BlackJackManager
     {
+        DeckOfCards deck;
+
+        [SerializeField] GameObject hitButton, stayButton;
+        [SerializeField] private AlexandraFixedBlackJackHand playerHand;
+        [SerializeField] private AlexandraFixedDealerHand dealerHand;
+        
+        public void FixedTryAgain()
+        {
+            //checking how many cards are remaining in the deck
+            if (DeckOfCards.deck.Count < 20)
+            {
+                TryAgain();
+            }
+            else
+            {
+                //Turn off Game Over UI
+                tryAgain.SetActive(false);
+                statusText.text = "";
+                
+                //turn back on the UI
+                hitButton.SetActive(true);
+                stayButton.SetActive(true);
+                
+                //clear old cards
+                playerHand.ResetHand();
+                dealerHand.ResetHand();
+            }
+
+        }
         public override int GetHandValue(List<DeckOfCards.Card> hand)
         {
             int handValue = 0;
             
-            // For counting the amount of ace(s)
+            // For counting the number of ace(s)
             int aceCount = 0;
 
             // By default, going through the high value
@@ -37,6 +66,9 @@ namespace VivianChen
             Debug.Log("HAND VALUE: " + handValue);
             
             return handValue;
+            
         }
+        
     }
 }
+

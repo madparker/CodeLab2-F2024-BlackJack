@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FixedBlackJackManager : MonoBehaviour
+public class GameManger : MonoBehaviourSingletonPersistent<GameManger>
 {
     // Start is called before the first frame update
     void Start()
