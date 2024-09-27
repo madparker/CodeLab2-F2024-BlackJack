@@ -10,22 +10,22 @@ public class DeckOfCards : MonoBehaviour {
 	public class Card{
 
 		public enum Suit {
-			SPADES, 	//0
-			CLUBS,		//1
-			DIAMONDS,	//2
-			HEARTS	 	//3
+			Spades, 	//0
+			Clubs,		//1
+			Diamonds,	//2
+			Hearts	 	//3
 		};
 
 		public enum Type {
-			TWO		= 2,
-			THREE	= 3,
-			FOUR	= 4,
-			FIVE	= 5,
-			SIX		= 6,
-			SEVEN	= 7,
-			EIGHT	= 8,
-			NINE	= 9,
-			TEN		= 10,
+			Two		= 2,
+			Three	= 3,
+			Four	= 4,
+			Five	= 5,
+			Six		= 6,
+			Seven	= 7,
+			Eight	= 8,
+			Nine	= 9,
+			Ten		= 10,
 			J		= 11,
 			Q		= 12,
 			K		= 13,
@@ -90,10 +90,6 @@ public class DeckOfCards : MonoBehaviour {
 				deck.Add(new Card(type, suit));
 			}
 		}
-	}
-	
-	// Update is called once per frame
-	void Update () {
 	}
 
 	public virtual Card DrawCard(){
