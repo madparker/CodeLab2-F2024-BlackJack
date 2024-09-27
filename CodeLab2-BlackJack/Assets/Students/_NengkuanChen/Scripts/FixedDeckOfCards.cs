@@ -51,7 +51,7 @@ namespace Students._NengkuanChen.Scripts
             {
                 cards.Add(int.Parse(line));
             }
-            return new DeckOfCards.Card((DeckOfCards.Card.Type)cards[drawCount++], Card.Suit.CLUBS);
+            return new DeckOfCards.Card((DeckOfCards.Card.Type)cards[drawCount++], Card.Suit.Clubs);
         }
 #endif
     }
