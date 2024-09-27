@@ -18,6 +18,7 @@ namespace AlexandraAnderson
             {
                 Destroy(transform.GetChild(i).gameObject);
             }
+            
         }
         
     }

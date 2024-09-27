@@ -11,6 +11,7 @@ namespace AlexandraAnderson
         [SerializeField] GameObject hitButton, stayButton;
         [SerializeField] private AlexandraFixedBlackJackHand playerHand;
         [SerializeField] private AlexandraFixedDealerHand dealerHand;
+        
         public void FixedTryAgain()
         {
             //checking how many cards are remaining in the deck
