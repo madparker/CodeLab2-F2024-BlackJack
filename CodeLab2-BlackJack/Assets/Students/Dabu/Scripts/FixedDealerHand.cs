@@ -76,21 +76,7 @@ namespace DabuLyu
             return handVal >= 17;
         }
 
-        public void RevealCard(){
-            //once reveal is true
-            reveal = true;
 
-            //set card one to the first card in the hand
-            GameObject cardOne = transform.GetChild(0).gameObject;
-
-            //set the second cards sprite to true
-            cardOne.GetComponentsInChildren<Image>()[0].sprite = null;
-            cardOne.GetComponentsInChildren<Image>()[1].enabled = true;
-
-            ShowCard(hand[0], cardOne, 0);
-
-            ShowValue();
-        }
     }
 }
 
