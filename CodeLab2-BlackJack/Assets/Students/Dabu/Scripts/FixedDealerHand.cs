@@ -71,9 +71,9 @@ namespace DabuLyu
         }
         
         
-        protected virtual bool DealStay(int handVal){
+        protected override bool DealStay(int handVal){
             //if the value is over 17 the dealer will stay and not draw
-            return handVal > 17;
+            return handVal >= 17;
         }
 
         public void RevealCard(){
