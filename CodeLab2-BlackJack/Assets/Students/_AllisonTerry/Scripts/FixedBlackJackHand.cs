@@ -10,8 +10,9 @@ namespace AllisonTerry
        protected DeckOfCards.Card extraCard;
        protected GameObject extraCardObj;
        public GameObject UseButton;
-       int cheatNumber =0;
-       public string jailScene;
+       float cheatNumber;
+       private float looseNumber;
+       public GameObject jailScene;
 
        protected override void SetupHand()
        {
@@ -24,6 +25,8 @@ namespace AllisonTerry
            }
            //run the hit extra function
            HitExtra();
+           cheatNumber = Random.Range(0, 3);
+           print(cheatNumber);
 
        }
 
@@ -51,16 +54,18 @@ namespace AllisonTerry
 
        public void UseCard()
        {
-           if (cheatNumber > 3)
+           looseNumber = Random.Range(0, 3);
+           print(looseNumber);
+           if (cheatNumber == looseNumber)
            {
-               SceneManager.LoadScene(jailScene);
+               jailScene.SetActive(true);
            }
-           cheatNumber++;
+           
            UseButton.SetActive(false);
            hand.Add(extraCard);
            ShowCard(extraCard,extraCardObj, hand.Count-1);
            ShowValue();
-           print(cheatNumber);
+           
        }
 
    }
