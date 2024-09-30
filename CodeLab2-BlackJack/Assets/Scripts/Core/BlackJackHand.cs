@@ -77,8 +77,19 @@ public class BlackJackHand : MonoBehaviour {
 	}
 
 	//prints the value of the player's hand on the screen
-	protected virtual void ShowValue(){
-		
+	protected virtual void ShowValue()
+	{
+		BlackJackManager manager = GameObject.Find("BlackJackManager").GetComponent<BlackJackManager>();
+		handVals = GetHandValue();
+				
+		// and set the text to print that value
+		total.text = "Player: " + handVals;
+
+		if (handVals > 21)
+		{
+			//the player busted
+			manager.PlayerBusted();
+		}
 	}
 
 	//gets the manager script
