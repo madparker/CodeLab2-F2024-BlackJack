@@ -5,6 +5,7 @@ using UnityEngine;
 public class SpyriBlackJackHandScript : BlackJackHand
 {
     private bool playerHasHit = false;
+    public AudioSource gameOverAudio;
     
     protected override void SetupHand()
     {

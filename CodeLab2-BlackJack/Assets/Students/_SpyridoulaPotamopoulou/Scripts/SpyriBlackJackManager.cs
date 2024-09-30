@@ -27,4 +27,9 @@ public class SpyriBlackJackManager : BlackJackManager
         }
         return handValue;
     }
+    
+    public void PlayerCaughtCheating(){
+        HidePlayerButtons(); //hides the buttons on screen to prevent the player from making any more moves
+        GameOverText("YOU GOT CAUGHT", Color.red); //feeds the relevant text and color into the GameOverText function
+    }
 }
