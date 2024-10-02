@@ -13,28 +13,28 @@ public class BlackJackManager : MonoBehaviour {
 
 	//initiates a game over condition for if the player busts
 	//meaning their hand value is greater than 21
-	public void PlayerBusted(){
+	public virtual void PlayerBusted(){
 		HidePlayerButtons(); //hides the buttons on screen to prevent the player from making any more moves
 		GameOverText("YOU BUST", Color.red); //feeds the relevant text and color into the GameOverText function
 	}
 
 	//initiates a game over condition for if the dealer busts
 	//meaning the dealer's hand value is greater than 21
-	public void DealerBusted(){
+	public virtual void DealerBusted(){
 		GameOverText("DEALER BUSTS!", Color.green); //feeds the relevant text and color into the GameOverText function
 		HidePlayerButtons(); //hides the buttons on screen to prevent the player from making any more moves
 	}
 		
 	//initiates a game over condition for if the player wins
 	//meaning their hand value is closer to 21 than the dealer's, but no one has busted
-	public void PlayerWin(){
+	public virtual void PlayerWin(){ //I changed this to virtual, makes my life easier
 		GameOverText("YOU WIN!", Color.green); //feeds the relevant text and color into the GameOverText function
 		HidePlayerButtons(); //hides the buttons on screen to prevent the player from making any more moves
 	}
 		
 	//initiates a game over condition for if the player loses
 	//meaning the dealer's hand value is closer to 21 than the player's, but no one has busted
-	public void PlayerLose(){
+	public virtual void PlayerLose(){
 		GameOverText("YOU LOSE.", Color.red); //feeds the relevant text and color into the GameOverText function
 		HidePlayerButtons(); //hides the buttons on screen to prevent the player from making any more moves
 	}
@@ -62,7 +62,7 @@ public class BlackJackManager : MonoBehaviour {
 	}
 
 	//a function which, when called, reloads the scene and starts the game over
-	public void TryAgain(){
+	public virtual void TryAgain(){
 		SceneManager.LoadScene(loadScene);
 	}
 
