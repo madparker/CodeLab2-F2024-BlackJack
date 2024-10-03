@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace HermanF
 {
@@ -32,6 +33,13 @@ namespace HermanF
             }
             
             return handVaule;
+        }
+
+        public override void TryAgain()
+        {
+            SceneManager.LoadScene(loadScene);
+            //GameManager.instance.RestartGame();
+            GameManager.instance.damageable = true;
         }
     }
 }
