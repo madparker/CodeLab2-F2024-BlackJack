@@ -57,8 +57,13 @@ public class BlackJackManager : MonoBehaviour {
 
 	//hides the buttons which allow the player to hit or stay
 	public void HidePlayerButtons(){
-		GameObject.Find("HitButton").SetActive(false);
-		GameObject.Find("StayButton").SetActive(false);
+		if (GameObject.Find("HitButton") != null && GameObject.Find("StayButton") != null)
+		{
+			GameObject.Find("HitButton").SetActive(false);
+			GameObject.Find("StayButton").SetActive(false);
+		}
+		
+		
 	}
 
 	//a function which, when called, reloads the scene and starts the game over
