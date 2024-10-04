@@ -34,7 +34,7 @@ namespace VivianChen
                 aceCount--;
             }
             
-            Debug.Log("HAND VALUE: " + handValue);
+            //Debug.Log("HAND VALUE: " + handValue);
             
             return handValue;
         }

@@ -17,9 +17,6 @@ namespace VivianChen
                 
                 GameObject.Find("BlackJackManager").GetComponent<BlackJackManager>().BlackJack();
                 
-                // I don't know why, but after "Try again",
-                // instead of running this function,
-                // the game will run the original function.
             }
         }
     }
