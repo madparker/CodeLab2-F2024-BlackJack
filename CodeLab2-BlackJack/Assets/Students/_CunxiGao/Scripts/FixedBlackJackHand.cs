@@ -7,7 +7,7 @@ namespace CunxiGao
     public class FixedBlackJackHand : BlackJackHand
     {
         private bool hasReplaced = false;
-        public GameObject cheatButton;
+        public GameObject gambleButton;
         
         public void ReplaceCard()
         {
@@ -27,7 +27,7 @@ namespace CunxiGao
                 ShowValue();
         
                 hasReplaced = true;
-                cheatButton.SetActive(false);
+                gambleButton.SetActive(false);
             }
         }
     }
