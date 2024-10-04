@@ -5,7 +5,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public class ShuffleBag<T> : ICollection<T>, IList<T>
+public class ShuffleBag<T> : IList<T>
 {
 	private List<T> data = new List<T> ();
 	private int cursor = 0;

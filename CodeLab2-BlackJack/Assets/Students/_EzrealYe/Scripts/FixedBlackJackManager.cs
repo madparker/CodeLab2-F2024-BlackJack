@@ -1,52 +1,130 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 namespace EzrealYe {
     public class FixedBlackJackManager : BlackJackManager
     {
-        public override int GetHandValue(List<DeckOfCards.Card> hand)
+        public int playerChips = 100;  // initial player chips
+        public int dealerChips = 100;  // initial dealer chips
+        public int betAmount = 10;     // default bet amount for each round
+        public Text playerChipText;    // UI element for displaying player's chips
+        public Text dealerChipText;    // UI element for displaying dealer's chips
+        public Button allInButton;     // button for All-In action
+        private bool isAllIn = false;  // track if All-In is activated
+
+        void Start()
         {
-            int handValue = 0; //stores the total value of the card in hand
-            int aceCount = 0; //store the number of A on hand
+            UpdateChipsUI();  // initialize chips display
+            allInButton.onClick.AddListener(HandleAllIn);  // bind All-In button click event so I don't have to do it again in inspector
+        }
 
-            // using for each to go through each card
-            foreach (DeckOfCards.Card handCard in hand) 
+        // method to handle All-In action when button is clicked
+        private void HandleAllIn()
+        {
+            betAmount = playerChips;  // set the bet amount to all of the player's chips
+            isAllIn = true;  // mark that All-In is activated
+        }
+
+        // override original function
+        public override void PlayerWin()
+        {
+            if (isAllIn)
             {
-                //get the highest possible value of each card
-                int cardValue = handCard.GetCardHighValue();
-                
-                //count the scores
-                handValue += cardValue;
-
-                // compare the card num to see if the card in hand is Ace
-                if (handCard.cardNum == DeckOfCards.Card.Type.A) 
-                {
-                    //if true, increment ace count
-                    aceCount++;
-                }
+                playerChips += betAmount * 2;  // If all-In, player wins double the chips
+            }
+            else
+            {
+                playerChips += betAmount;  // regular win adds the bet amount to player's chips
             }
 
-            // if hand value is greater than 22 && there is more than 0 Ace card in hand
-            while (handValue > 21 && aceCount > 0) 
+            dealerChips -= betAmount;  // deduct bet amount from dealer's chips
+            UpdateChipsUI();  // update the chips display
+            base.PlayerWin();  // call the original PlayerWin logic
+            ResetBet();  // reset bet amount and All-In status
+        }
+
+        // override original function
+        public override void PlayerLose()
+        {
+            playerChips -= betAmount;  // Deduct the bet amount from player's chips
+            dealerChips += betAmount;  // Add the bet amount to dealer's chips
+            UpdateChipsUI();  // Update the chips display
+            base.PlayerLose();  // Call the original PlayerLose logic
+
+            ResetBet();  // Reset bet amount and All-In status
+        }
+
+        // override original function
+        public override void DealerBusted()
+        {
+            if (isAllIn)
             {
-                // minus 10 points from the total hand value
-
-                // I directly subtract 10 points from the total score, since it's more efficient than adjusting the actual value of each Ace
-                // for example, if the total score exceeds 21 while the player has multiple Aces, the program just needs to treat one Ace as 1 instead of 11.
-                // if the player draws another card and the total exceeds 21 again, the program will repeat the process by treating another Ace as 1, 
-                // without needing to adjust the value of each Ace individually
-
-                //and it's less complex than dealing with assigning Ace different values...
-
-                handValue -= 10;
-
-                // ace Count minus 1, and it means this specific Ace is already being processed
-                aceCount--;
+                playerChips += betAmount * 2;  // if All-In, player wins double the chips
+            }
+            else
+            {
+                playerChips += betAmount;  // regular win adds the bet amount to player's chips
             }
 
-            return handValue; // return the final hand Value after calculating Ace's special rules
+            dealerChips -= betAmount;  // deduct bet amount from dealer's chips
+            UpdateChipsUI();  // update the chips display
+            base.DealerBusted();  // call the original DealerBusted logic
+
+            ResetBet();  // reset bet amount and All-In status
+        }
+
+        // override original function
+        public override void PlayerBusted()
+        {
+            playerChips -= betAmount;  // deduct the bet amount from player's chips
+            dealerChips += betAmount;  // add the bet amount to dealer's chips
+            UpdateChipsUI();  // update the chips display
+            base.PlayerBusted();  // call the original PlayerBusted logic
+
+            ResetBet();  // reset bet amount and All-In status
+        }
+
+        // Update the chip UI display 
+        void UpdateChipsUI()
+        {
+            if (playerChipText != null)
+            {
+                playerChipText.text = "Player Chips: " + playerChips;  // update player's chips text
+            }
+
+            if (dealerChipText != null)
+            {
+                dealerChipText.text = "Dealer Chips: " + dealerChips;  // update dealer's chips text
+            }
+
+            // disable the All-In button if the player has no chips left
+            if (playerChips <= 0)
+            {
+                allInButton.interactable = false;  // Disable the All-In button
+            }
+            else
+            {
+                allInButton.interactable = true;  // Enable the All-In button
+            }
+        }
+
+        // reset the bet amount and All-In status
+        void ResetBet()
+        {
+            betAmount = 10;  // Restore default bet amount
+            isAllIn = false;  // Reset All-In status
+        }
+
+        // Override TryAgain method to reset game without resetting chips
+        public override void TryAgain()
+        {
+            UpdateChipsUI();  // update chips display
+            base.TryAgain();  // call the original scene reloading logic
         }
     }
 }
+
 

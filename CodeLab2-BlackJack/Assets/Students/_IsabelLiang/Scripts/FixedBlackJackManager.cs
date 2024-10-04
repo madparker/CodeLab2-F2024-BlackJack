@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Net.Mime;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -9,12 +11,19 @@ namespace IsabelLiang
 {
     public class FixedBlackJackManager : BlackJackManager
     {
+        public int chances = 3;//chances of busted save
+        public int temp = 0;//handValue after busted save
+        public int temp2 = 0;//real accumulated handValue after busted save
+        public int temp3 = 0;//card pulled last time after busted save
+        public bool dealer = false;//mark true when dealer acts
+        public GameObject textChance;
+        
         // Adds all the cards together to get the hand value
         public override int GetHandValue(List<DeckOfCards.Card> hand)
         {
             int handValue = 0;  // Initialize total hand value
             int aceNum = 0;     // Counter to track the number of Aces in the hand
-
+            
             // First, iterate through all the cards in the hand
             foreach (DeckOfCards.Card handCard in hand)
             {
@@ -41,6 +50,28 @@ namespace IsabelLiang
                 }
             }
             
+            if (dealer) return handValue;//Dealer does not have chances
+            
+            if (chances == 3)//set temp if player uses chance; temp is the real hand value after busted save
+            { 
+                temp = handValue;
+                temp2 = handValue;//save the real handValue
+            }
+            else
+            {
+                temp3 = handValue - temp2;//current real handValue - previous real handValue (The card value added this time)
+                temp2 = handValue;//save the real handValue
+                handValue = temp + temp3;//simulate the handValue after last bused save + card value added this time
+            }
+            
+            if (handValue > 21 && chances > 0)//if player busted but chances left
+            {
+                chances -= 1;//decrease one chance
+                handValue = 21 - (handValue - 21);//change handValue to busted-saved hand value
+                temp = handValue;//record the current hand value for next chance usage
+                textChance.GetComponent<Text>().text = "Chances Remaining: " + chances;//update chances remaining text
+            }
+            
             //Natural Blackjack
             if (hand.Count == 2 && handValue == 21)
             {
@@ -50,12 +81,24 @@ namespace IsabelLiang
             // Return the final hand value
             return handValue;
         }
+        
 
+
+        public void ResetChances()//called when dealer gets to use chances
+        {
+            chances = 3;
+            temp = 0;
+            temp2 = 0;
+            temp3 = 0;
+            dealer = true;
+            
+            textChance.GetComponent<Text>().text = "Dealer Moves";//update chances remaining text
+        }
         
         
         //try again button reloads the scene
         public void TryAgain(){
-            SceneManager.LoadScene("IsabelBlackJack");
+            SceneManager.LoadScene(loadScene);
         }
         
     }

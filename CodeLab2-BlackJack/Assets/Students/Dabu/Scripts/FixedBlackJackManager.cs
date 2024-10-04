@@ -6,7 +6,7 @@ namespace DabuLyu
 {
     public class FixedBlackJackManager : BlackJackManager
     {
-        // Start is called before the first frame update
+        
         void Start()
         {
         
@@ -49,24 +49,18 @@ namespace DabuLyu
         public int BlackJackGetHandValue(List<DeckOfCards.Card> hand)
         {
             int handValue = 0;
-            int aceCount = 0;
             
+            List<DeckOfCards.Card> cardsToEliminate = new List<DeckOfCards.Card>();
+            
+            //value without elimination
             foreach (DeckOfCards.Card card in hand)
             {
                 handValue += card.GetCardHighValue();
-                
-                if (card.GetCardHighValue() == 11)
-                {
-                    aceCount++;
-                }
             }
+
+
             
-            while (handValue > 21 && aceCount > 0)
-            {
-                handValue -= 10;
-                aceCount--;
-            }
-            
+
             return handValue;
         }
         

@@ -6,10 +6,7 @@ namespace IsabelLiang
 {
     public class FixedBlackJackHand : BlackJackHand
     {
-        //gets the value of the player hand
-        protected override void ShowValue(){
-            base.ShowValue();
-        }
+        
 
     }
 
