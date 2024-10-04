@@ -1,9 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using SpyriPotam;
 public class SpyriBlackJackManager : BlackJackManager
 {
+    public SingletonManagementScript cheatRecorder;
+    public AudioClip letsGo;
+    public AudioClip awDangit;
+    public AudioSource audioPlayer;
+    
     public override int GetHandValue(List<DeckOfCards.Card> hand)
     {
         //gets the actual value of the player's hand
@@ -30,6 +35,20 @@ public class SpyriBlackJackManager : BlackJackManager
     
     public void PlayerCaughtCheating(){
         HidePlayerButtons(); //hides the buttons on screen to prevent the player from making any more moves
+        audioPlayer = GetComponent<AudioSource>();
+        audioPlayer.clip = awDangit;
+        audioPlayer.Play();
+        Invoke("ResetAudioClip", 3);
         GameOverText("YOU GOT CAUGHT", Color.red); //feeds the relevant text and color into the GameOverText function
+    }
+
+    public void ResetCheatCheck()
+    {
+        cheatRecorder.haveCheated = false;
+    }
+
+    private void ResetAudioClip()
+    {
+        audioPlayer.clip = letsGo;
     }
 }
