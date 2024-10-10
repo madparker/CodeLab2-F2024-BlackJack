@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace AlexandraAnderson
 {
@@ -8,6 +9,8 @@ namespace AlexandraAnderson
     {
         DeckOfCards deck;
 
+        public Button betbtn;
+        
         [SerializeField] GameObject hitButton, stayButton;
         [SerializeField] private AlexandraFixedBlackJackHand playerHand;
         [SerializeField] private AlexandraFixedDealerHand dealerHand;
