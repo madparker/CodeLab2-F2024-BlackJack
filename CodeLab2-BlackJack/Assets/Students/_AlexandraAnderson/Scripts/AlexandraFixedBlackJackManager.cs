@@ -9,7 +9,15 @@ namespace AlexandraAnderson
     {
         DeckOfCards deck;
 
+        //game bet button
         public Button betbtn;
+        
+        //public text to access & update
+        public Text scoreText;
+        public Text betsText;
+        
+        //how much money is bet
+        public int pot = 0;
         
         [SerializeField] GameObject hitButton, stayButton;
         [SerializeField] private AlexandraFixedBlackJackHand playerHand;
